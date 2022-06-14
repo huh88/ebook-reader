@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { faBug, faCog, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
+  import { faBug, faCog, faTimes, faTrash, faExpand } from '@fortawesome/free-solid-svg-icons';
   import { createEventDispatcher } from 'svelte';
   import { quintOut } from 'svelte/easing';
   import { scale } from 'svelte/transition';
@@ -13,6 +13,8 @@
   } from '$lib/css-classes';
   import { inputAllowDirectory } from '$lib/functions/file-dom/input-allow-directory';
   import { inputFile } from '$lib/functions/file-dom/input-file';
+  import { fullscreenManager } from '$lib/data/fullscreen-manager';
+
 
   export let hasBookOpened: boolean;
   export let selectMode: boolean;
@@ -24,6 +26,7 @@
     removeClick: void;
     bugReportClick: void;
     backToBookClick: void;
+    fullscreenClick: void;
     filesChange: FileList;
   }>();
 
@@ -33,6 +36,8 @@
   function dispatchFilesChange(fileList: FileList) {
     dispatch('filesChange', fileList);
   }
+
+  const fullscreenEnabled = fullscreenManager.fullscreenEnabled
 
   const inAnimationParams = {
     delay: 150,
@@ -170,6 +175,16 @@
             />
           </label>
         {/if}
+        
+        {#if {fullscreenEnabled}}
+        <div
+          role="button"
+          on:click={() => dispatch('fullscreenClick')}
+          class="flex h-full items-center text-xl xl:text-lg {pHeaderFa} {opacityHeaderIcon} cursor-pointer"
+        >
+          <Fa icon={faExpand} />
+        </div>
+      {/if}
 
         <a href="/settings">
           <span

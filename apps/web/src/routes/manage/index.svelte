@@ -9,6 +9,7 @@
   import BookCardList from '$lib/components/book-card/book-card-list.svelte';
   import type { BookCardProps } from '$lib/components/book-card/book-card-props';
   import type { BooksDbBookmarkData } from '$lib/data/database/books-db/versions/books-db';
+  import { fullscreenManager } from '$lib/data/fullscreen-manager';
   import { pxScreen } from '$lib/css-classes';
   import { dialogManager } from '$lib/data/dialog-manager';
   import { database, requestPersistentStorage$ } from '$lib/data/store';
@@ -180,6 +181,14 @@
       }
     ]);
   }
+
+  function onFullscreenClick() {
+    if (!fullscreenManager.fullscreenElement) {
+      fullscreenManager.requestFullscreen(document.documentElement);
+      return;
+    }
+    fullscreenManager.exitFullscreen();
+  }
 </script>
 
 <svelte:head>
@@ -197,6 +206,7 @@
     on:removeClick={() => removeBooks(Array.from(selectedBookIds))}
     on:filesChange={(ev) => onFilesChange(ev.detail)}
     on:bugReportClick={onBugReportClick}
+    on:fullscreenClick={onFullscreenClick}
   />
 </div>
 
