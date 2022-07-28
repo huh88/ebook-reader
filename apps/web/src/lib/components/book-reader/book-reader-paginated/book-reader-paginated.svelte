@@ -363,9 +363,7 @@
   bind:this={scrollEl}
   style:color={fontColor}
   style:font-size="{fontSize}px"
-  style:padding-top={!verticalMode && firstDimensionMargin
-    ? `${firstDimensionMargin}px`
-    : undefined}
+  style:padding-top={!verticalMode && firstDimensionMargin ? `${0}px` : undefined}
   style:padding-bottom={!verticalMode && firstDimensionMargin
     ? `${firstDimensionMargin}px`
     : undefined}

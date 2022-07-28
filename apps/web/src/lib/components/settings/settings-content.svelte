@@ -147,7 +147,7 @@
       bind:value={fontFamilyGroupTwo}
     />
   </SettingsItemGroup>
-  <SettingsItemGroup title={verticalMode ? 'Reader Left/right margin' : 'Reader Top/bottom margin'}>
+  <SettingsItemGroup title={verticalMode ? 'Reader Left/right margin' : 'Reader Bottom margin'}>
     <SettingsDimensionPopover
       slot="header"
       isFirstDimension
